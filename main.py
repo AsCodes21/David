@@ -3,6 +3,8 @@ from discord.ext import commands
 import youtube_dl
 import os
 
+from keep_alive import keep_alive
+
 client = commands.Bot(command_prefix="^",intents=discord.Intents.all())
 ffmpeg_options = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-vn -filter:a "volume=0.25"'}
 
@@ -87,4 +89,6 @@ async def play(ctx, arg):
     else:
         await ctx.send("You need to be in a voice channel to use this command.")
 
+
+keep_alive()
 client.run(os.environ.get("token"))
